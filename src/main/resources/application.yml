@@ -6,11 +6,18 @@ spring:
                 format_sql: true
         defer-datasource-initialization: true
     datasource:
-                url: jdbc:h2:mem:testdb
+        url: jdbc:h2:mem:testdb
+        username: sa
     h2:
         console:
-         enabled: true
-    jwt:
-        issuer: alsdnr1080@gmail.com
-        secret_key: study-springboot
-
+            enabled: true
+    security:
+        oauth2:
+            client:
+                registration:
+                    google:
+                        client-id: 
+                        client-secret: 
+jwt:
+    issuer:
+    secret_key: study-springboot

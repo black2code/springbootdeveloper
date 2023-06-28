@@ -1,5 +1,6 @@
 package com.minwook.springbootdeveloper.service;
 
+
 import com.minwook.springbootdeveloper.domain.User;
 import com.minwook.springbootdeveloper.dto.AddUserRequest;
 import com.minwook.springbootdeveloper.repository.UserRepository;
@@ -12,13 +13,13 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public Long save(AddUserRequest dto) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
         return userRepository.save(User.builder()
                 .email(dto.getEmail())
-                // 패스워드 암호화
-                .password(bCryptPasswordEncoder.encode(dto.getPassword()))
+                .password(encoder.encode(dto.getPassword()))
                 .build()).getId();
     }
 
@@ -26,4 +27,11 @@ public class UserService {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
     }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
+    }
+
+
 }

@@ -12,7 +12,7 @@ public class UserViewController {
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "oauthlogin";
     }
 
     @GetMapping("/signup")
@@ -20,10 +20,4 @@ public class UserViewController {
         return "signup";
     }
 
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
-        new SecurityContextLogoutHandler().logout(request, response,
-                SecurityContextHolder.getContext().getAuthentication());
-        return "redirect:/login";
-    }
 }
